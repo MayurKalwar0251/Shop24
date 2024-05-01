@@ -3,6 +3,8 @@ import Layout from "../components/Layout";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/cart";
+import { url } from "../url";
+
 const ProductDetails = () => {
   const params = useParams();
 
@@ -16,9 +18,7 @@ const ProductDetails = () => {
   }, []);
 
   async function getProduct() {
-    const { data } = await axios.get(
-      `http://localhost:5000/api/v1/product/product/${params.pid}`
-    );
+    const { data } = await axios.get(url + `/product/product/${params.pid}`);
     console.log(data.product);
     setProduct(data.product);
   }

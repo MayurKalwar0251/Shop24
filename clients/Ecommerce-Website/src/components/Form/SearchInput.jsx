@@ -3,6 +3,7 @@ import { useSearch } from "../../contexts/search";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../url";
 
 const SearchInput = () => {
   const [value, setValue] = useSearch();
@@ -12,7 +13,7 @@ const SearchInput = () => {
     e.preventDefault();
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/product/search/${value.keyword}`
+        url + `/product/search/${value.keyword}`
       );
 
       if (data.success) {

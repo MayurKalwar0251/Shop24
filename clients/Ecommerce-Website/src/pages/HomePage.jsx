@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../utils/Prices";
 import ProductsTemplate from "../utils/ProductsTemplate";
+import { url } from "../url";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -18,11 +19,10 @@ const HomePage = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/product/all-products?page=${
-          page + 1
-        }&category=${filters.checked}&minPrice=${filters.radio[0]}&maxPrice=${
-          filters.radio[1]
-        }`
+        url +
+          `/product/all-products?page=${page + 1}&category=${
+            filters.checked
+          }&minPrice=${filters.radio[0]}&maxPrice=${filters.radio[1]}`
       );
       if (data.success) {
         setPage(page + 1);
@@ -39,9 +39,7 @@ const HomePage = () => {
 
   async function totalProductCount() {
     try {
-      const { data } = await axios.get(
-        "http://localhost:5000/api/v1/product/total"
-      );
+      const { data } = await axios.get(url + "/product/total");
       if (data.success) {
         setTotalCount(data.total);
       }
@@ -53,9 +51,7 @@ const HomePage = () => {
 
   async function getAllCategory() {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/category/all-category"
-      );
+      const response = await axios.get(url + "/category/all-category");
 
       if (response.data.success) {
         setCategory(response.data.category);
@@ -71,7 +67,8 @@ const HomePage = () => {
   async function getAllProducts() {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/product/all-products?page=${page}&category=${filters.checked}&minPrice=${filters.radio[0]}&maxPrice=${filters.radio[1]}`
+        url +
+          `/product/all-products?page=${page}&category=${filters.checked}&minPrice=${filters.radio[0]}&maxPrice=${filters.radio[1]}`
       );
 
       if (data.success) {

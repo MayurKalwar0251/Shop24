@@ -5,6 +5,8 @@ import { Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/Layout";
 import AdminMenu from "../../components/Menu/AdminMenu";
+import { url } from "../../url";
+
 const { Option } = Select;
 
 const UpdateProduct = () => {
@@ -28,9 +30,7 @@ const UpdateProduct = () => {
   //get single product
   const getSingleProduct = async () => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:5000/api/v1/product/product/${param.pid}`
-      );
+      const { data } = await axios.get(url + `/product/product/${param.pid}`);
       setProduct(data.product);
       setName(data.product.name);
       setId(data.product._id);
@@ -48,9 +48,7 @@ const UpdateProduct = () => {
   //get all category
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:5000/api/v1/category/all-category"
-      );
+      const { data } = await axios.get(url + "/category/all-category");
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -82,7 +80,7 @@ const UpdateProduct = () => {
         console.log("Photo ", photo);
       }
       const { data } = await axios.put(
-        `http://localhost:5000/api/v1/product/product/${param.pid}`,
+        url + `/product/product/${param.pid}`,
         productData
       );
       if (data?.success) {
@@ -103,7 +101,7 @@ const UpdateProduct = () => {
     photoData.append("photo", photo);
 
     const { data } = await axios.put(
-      `http://localhost:5000/api/v1/product/image/${param.pid}`,
+      url + `/product/image/${param.pid}`,
       photoData
     );
   };
@@ -112,9 +110,7 @@ const UpdateProduct = () => {
     try {
       let answer = window.prompt("Are You Sure want to delete this product ? ");
       if (!answer) return;
-      await axios.delete(
-        `http://localhost:5000/api/v1/product/product/${param.pid}`
-      );
+      await axios.delete(url + `/product/product/${param.pid}`);
       toast.success("Product Deleted Succfully");
       navigate("/dashboard/admin/products");
     } catch (error) {

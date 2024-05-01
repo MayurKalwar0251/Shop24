@@ -4,6 +4,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../contexts/auth";
+import { url } from "../url";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -19,10 +20,14 @@ const RegisterPage = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/register",
-        { name, email, password, phoneNO, address, sport }
-      );
+      const response = await axios.post(url + "/auth/register", {
+        name,
+        email,
+        password,
+        phoneNO,
+        address,
+        sport,
+      });
 
       if (response && response.data.success) {
         toast.success(response.data.message);

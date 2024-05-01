@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Select } from "antd";
+import { url } from "../../url";
 
 const { Option } = Select;
 
@@ -23,9 +24,7 @@ const CreateProduct = () => {
 
   async function getAllCategory() {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/category/all-category"
-      );
+      const response = await axios.get(url + "/category/all-category");
 
       if (response.data.success) {
         setCategory(response.data.category);
@@ -54,10 +53,7 @@ const CreateProduct = () => {
       formData.append("shipping", shipping);
       formData.append("photo", photo);
       console.log(photo);
-      const res = await axios.post(
-        "http://localhost:5000/api/v1/product/create-product",
-        formData
-      );
+      const res = await axios.post(url + "/product/create-product", formData);
 
       if (res.data?.success) {
         toast.success(res.data?.message);

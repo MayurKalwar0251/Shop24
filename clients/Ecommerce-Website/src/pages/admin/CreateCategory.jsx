@@ -4,6 +4,7 @@ import AdminMenu from "../../components/Menu/AdminMenu";
 import Form from "./Form";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { url } from "../../url";
 
 const CreateCategory = () => {
   const [name, setName] = useState("");
@@ -14,9 +15,7 @@ const CreateCategory = () => {
 
   async function getAllCategory() {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/category/all-category"
-      );
+      const response = await axios.get(url + "/category/all-category");
 
       if (response.data.success) {
         setCategory(response.data.category);
@@ -32,12 +31,9 @@ const CreateCategory = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/category/add",
-        {
-          name,
-        }
-      );
+      const response = await axios.post(url + "/category/add", {
+        name,
+      });
 
       if (response.data.success) {
         toast.success(response.data.message);
@@ -55,7 +51,7 @@ const CreateCategory = () => {
   async function handleDelete(id) {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/v1/category/delete-category/${id}`
+        url + `/category/delete-category/${id}`
       );
 
       if (response.data.success) {
@@ -73,7 +69,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/v1/category/update-category/${selected._id}`,
+        url + `/category/update-category/${selected._id}`,
         {
           name: updatedName,
         }

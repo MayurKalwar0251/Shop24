@@ -4,6 +4,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../contexts/auth";
+import { url } from "../url";
 
 const LoginPage = () => {
   const [auth, setAuth] = useAuth();
@@ -15,10 +16,10 @@ const LoginPage = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
-        { email, password }
-      );
+      const response = await axios.post(url + "/auth/login", {
+        email,
+        password,
+      });
 
       if (response && response.data.success) {
         toast.success(response.data.message);

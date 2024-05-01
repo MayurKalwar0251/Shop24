@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import AdminMenu from "../../components/Menu/AdminMenu";
 import Layout from "../../components/Layout";
+import { url } from "../../url";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
@@ -14,9 +15,7 @@ const AllUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/auth/admin/all-users"
-      );
+      const response = await axios.get(url + "/auth/admin/all-users");
       setUsers(response.data.users);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -27,7 +26,7 @@ const AllUsers = () => {
     try {
       console.log(uid);
       const response = await axios.put(
-        `http://localhost:5000/api/v1/auth/admin/update-role?uid=${uid}`
+        url + `/auth/admin/update-role?uid=${uid}`
       );
     } catch (error) {
       console.log(error);

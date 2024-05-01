@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import Layout from "../../components/Layout";
 import AdminMenu from "../../components/Menu/AdminMenu";
 import { Link } from "react-router-dom";
+import { url } from "../../url";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -11,9 +12,7 @@ const Products = () => {
 
   async function getAllProducts() {
     try {
-      const res = await axios.get(
-        "http://localhost:5000/api/v1/product/get-products"
-      );
+      const res = await axios.get(url + "/product/get-products");
 
       if (res.data.success) {
         setProducts(res.data.product);
@@ -29,7 +28,7 @@ const Products = () => {
       const nextPage = page + 1; // Calculate the next page before updating state
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/v1/product/get-products?page=${nextPage}`
+        url + `/product/get-products?page=${nextPage}`
       );
 
       if (data.success) {
