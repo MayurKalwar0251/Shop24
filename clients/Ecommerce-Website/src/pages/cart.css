@@ -1,0 +1,17 @@
+.addIconBtn {
+  border: none;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  width: 35px;
+  height: 35px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addIconBtn:focus {
+  outline: none;
+}
